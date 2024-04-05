@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
 async function submitRequest(){
     result = await submitSign()
     alert("You have successfully "+result.signType+" at "+result.time)
-    if(result.signType = "Sign Out"){
+    if(result.signType == "Signed Out"){
         document.getElementById("inputForm").reset();
     }
 }
