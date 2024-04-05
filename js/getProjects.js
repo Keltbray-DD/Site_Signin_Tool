@@ -62,7 +62,8 @@ async function getProjectList(scopeInput){
             "lastName": $("#lastName").val(),
             "email": $("#Email").val(),
             "phone": $("#Phone").val(),
-            "vehicleReg": $("#VehicleReg").val()
+            "vehicleReg": $("#VehicleReg").val(),
+            "distanceTravelled": $("#DistanceTravelled").val()
             };
         
         const headers = {
@@ -101,6 +102,7 @@ function checkURL(){
             getProjectFromURL()
         } else {
             console.log('The URL does not contain an Project ID parameter');
+            alert("No project code detected please check link provided has a Project code in the URL")
         }
     }
 
