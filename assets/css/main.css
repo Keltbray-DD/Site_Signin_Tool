@@ -382,6 +382,15 @@ input[type="submit"]:active {
         h1{
             font-size: 1.5em;
         }
+        .form-container {
+          background-color: #FAFAFA;
+          padding: 20px;
+          border-radius: 5px;
+          box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* slight box shadow */
+          width: 85%; /* Adjust the width of the container */
+          margin: 0 auto; /* Center the container */
+          margin-top: 20px;
+        }
       }
 /* Customize the label (the container) */
 .container {

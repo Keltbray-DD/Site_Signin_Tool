@@ -117,7 +117,7 @@ async function getProjectFromURL(){
             // Display the extracted ID
             console.log('Extracted ID:', id);
             sessionStorage.setItem("projectID",id)
-            header.innerHTML = `<h1>Keltbray Site Sign In <br>${id} </h1>`
+            header.innerHTML = `<h1>Keltbray Site Sign In/Out <br>${id} </h1>`
         } else {
             console.log('No ID parameter found in the URL');
         }
