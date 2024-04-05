@@ -54,7 +54,7 @@ async function getProjectList(scopeInput){
     async function submitSign(){
 
         const bodyData = {
-            "project":  "DT0001",
+            "project": sessionStorage.getItem("projectID"),
             "firstName": $("#firstName").val(),
             "lastName": $("#lastName").val(),
             "email": $("#Email").val(),
