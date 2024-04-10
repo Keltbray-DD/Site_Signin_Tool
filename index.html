@@ -86,7 +86,26 @@
         </div>
     </main>
     <script>
+        window.onload = function() {
+            var deviceId = localStorage.getItem("deviceId");
 
+            // If device is not remembered, prompt user to remember it
+            if (!deviceId) {
+                var remember = confirm("Do you want to remember this device?");
+                if (remember) {
+                    deviceId = generateDeviceId();
+                    localStorage.setItem("deviceId", deviceId);
+                }
+            }
+
+            // You can use the deviceId here for any purpose, for example, sending it to the server for authentication.
+            console.log("Device ID:", deviceId);
+        };
+
+        // Function to generate a unique device ID (you may replace this with your own method)
+        function generateDeviceId() {
+            return "device_" + Math.random().toString(36).substr(2, 10);
+        }
     </script>
 </body>
 </html>
