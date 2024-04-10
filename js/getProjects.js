@@ -1,8 +1,38 @@
+let localEmail;
+let localPhone;
+let localFirstName;
+let localLastName;
+let localVehicleReg;
+
 document.addEventListener('DOMContentLoaded', function() {
     checkURL()})
 
 async function submitRequest(){
     result = await submitSign()
+    localEmail = localStorage.getItem("localEmail");
+    localPhone = localStorage.getItem("localPhone");
+    localFirstName = localStorage.getItem("localFirstName");
+    localLastName = localStorage.getItem("localLastName");
+    localVehicleReg = localStorage.getItem("localVehicleReg");
+
+    // If device is not remembered, prompt user to remember it
+    if (!localEmail || !localFirstName || !localLastName || !localPhone) {
+        var remember = confirm("Do you want to remember your details for future sign ins?");
+        if (remember) {
+              
+            localFirstName = $("#firstName").val(),
+            localLastName = $("#lastName").val(),
+            localEmail = $("#Email").val(),
+            localPhone = $("#Phone").val(),
+            localVehicleReg = $("#VehicleReg").val(),
+
+            localStorage.setItem("localFirstName", localFirstName);
+            localStorage.setItem("localLastName", localLastName);
+            localStorage.setItem("localEmail", localEmail);
+            localStorage.setItem("localPhone", localPhone);
+            localStorage.setItem("localVehicleReg", localVehicleReg);
+        }
+    }
     alert("You have successfully "+result.signType+" at "+result.time)
     if(result.signType == "Signed Out"){
         document.getElementById("inputForm").reset();
