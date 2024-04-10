@@ -3,29 +3,67 @@ let localPhone;
 let localFirstName;
 let localLastName;
 let localVehicleReg;
+let inputEmail;
+let inputFirstName;
+let inputLastName;
+let inputPhone;
+let inputVehicleReg;
 
 document.addEventListener('DOMContentLoaded', function() {
-    checkURL()})
+    checkURL()
+    populateFromStorage()
+    
+})
 
-async function submitRequest(){
-    result = await submitSign()
+async function populateFromStorage(){
+    inputEmail = document.getElementById("Email")
+    inputFirstName = document.getElementById("firstName")
+    inputLastName = document.getElementById("lastName")
+    inputPhone = document.getElementById("Phone")
+    inputVehicleReg = document.getElementById("VehicleReg")
+
     localEmail = localStorage.getItem("localEmail");
     localPhone = localStorage.getItem("localPhone");
     localFirstName = localStorage.getItem("localFirstName");
     localLastName = localStorage.getItem("localLastName");
     localVehicleReg = localStorage.getItem("localVehicleReg");
 
+    inputEmail.value = localEmail
+    console.log("Email:",localEmail)
+
+    inputFirstName.value = localFirstName
+    console.log("First Name:",localFirstName)
+
+    inputLastName.value = localLastName
+    console.log("Last Name:",localLastName)
+
+    inputPhone.value = localPhone
+    console.log("Phone:",localPhone)
+
+    inputVehicleReg.value = localVehicleReg
+    console.log("Vehicle Reg:",localVehicleReg)
+}
+
+async function submitRequest(){
+    localEmail = localStorage.getItem("localEmail");
+    localPhone = localStorage.getItem("localPhone");
+    localFirstName = localStorage.getItem("localFirstName");
+    localLastName = localStorage.getItem("localLastName");
+    localVehicleReg = localStorage.getItem("localVehicleReg");
+
+    localFirstName = $("#firstName").val(),
+    localLastName = $("#lastName").val(),
+    localEmail = $("#Email").val(),
+    localPhone = $("#Phone").val(),
+    localVehicleReg = $("#VehicleReg").val()
+    console.log("Reg:",localVehicleReg)
+
+    result = await submitSign()
+
     // If device is not remembered, prompt user to remember it
-    if (!localEmail || !localFirstName || !localLastName || !localPhone) {
+    if (!localEmail || !localFirstName || !localLastName || !localPhone || !localVehicleReg) {
         var remember = confirm("Do you want to remember your details for future sign ins?");
         if (remember) {
-              
-            localFirstName = $("#firstName").val(),
-            localLastName = $("#lastName").val(),
-            localEmail = $("#Email").val(),
-            localPhone = $("#Phone").val(),
-            localVehicleReg = $("#VehicleReg").val(),
-
             localStorage.setItem("localFirstName", localFirstName);
             localStorage.setItem("localLastName", localLastName);
             localStorage.setItem("localEmail", localEmail);
@@ -33,9 +71,26 @@ async function submitRequest(){
             localStorage.setItem("localVehicleReg", localVehicleReg);
         }
     }
+   // If device is not remembered, prompt user to remember it
+   if (localEmail != localStorage.getItem("localEmail")|| 
+   localFirstName != localStorage.getItem("localFirstName")|| 
+   localLastName != localStorage.getItem("localLastName")|| 
+   localPhone != localStorage.getItem("localPhone")|| 
+   localVehicleReg != localStorage.getItem("localVehicleReg")) {
+        var remember = confirm("Do you want to update your details?");
+        if (remember) {
+            localStorage.setItem("localFirstName", localFirstName);
+            localStorage.setItem("localLastName", localLastName);
+            localStorage.setItem("localEmail", localEmail);
+            localStorage.setItem("localPhone", localPhone);
+            localStorage.setItem("localVehicleReg", localVehicleReg);
+        }
+    }
+    localStorage.setItem("localVehicleReg", localVehicleReg);
+    
     alert("You have successfully "+result.signType+" at "+result.time)
     if(result.signType == "Signed Out"){
-        document.getElementById("inputForm").reset();
+        //document.getElementById("inputForm").reset();
     }
 }
 
@@ -140,7 +195,7 @@ async function getProjectFromURL(){
         // Get the URL of the current page
         var url = window.location.href;
         var header = document.getElementById('main_header')
-        console.log(header)
+
         // Check if the URL contains a parameter named 'id'
         if (url.indexOf('id=') !== -1) {
             // Extract the value of the 'id' parameter
